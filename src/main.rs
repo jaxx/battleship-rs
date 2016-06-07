@@ -1,3 +1,12 @@
+extern crate websocket;
+extern crate mount;
+extern crate staticfile;
+extern crate iron;
+
+mod server;
+mod page;
+
 fn main() {
-    println!("Hello, world!");
+    //server::start();
+    page::serve();
 }
