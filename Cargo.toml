@@ -1,0 +1,7 @@
+[package]
+name = "battleship-rs"
+version = "0.1.0"
+authors = ["Jakko Sikkar <jakko.sikkar@gmail.com>"]
+
+[dependencies]
+websocket = "0.17.1"
