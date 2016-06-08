@@ -5,8 +5,9 @@ extern crate iron;
 
 mod server;
 mod page;
+mod board;
 
 fn main() {
-    //server::start();
+    server::start();
     page::serve();
 }

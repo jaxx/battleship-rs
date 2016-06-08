@@ -4,6 +4,7 @@ version = "0.1.0"
 authors = ["Jakko Sikkar <jakko.sikkar@gmail.com>"]
 
 [dependencies]
+env_logger = "0.3.3"
 websocket = "0.17.1"
 mount = "0.1.0"
 staticfile = "0.2.0"
