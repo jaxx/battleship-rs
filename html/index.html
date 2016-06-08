@@ -18,6 +18,7 @@
     var server = $('#server');
     var connectBtn = $("#connect");
     var disconnectBtn = $("#disconnect");
+    var log = $("#log");
 
     var socket;
 
@@ -36,8 +37,7 @@
         };
 
         socket.onmessage = function(ev) {
-            var data = ev.data;
-            console.log("received message: " + data);
+            log.val(ev.data);
         };
 
         /*

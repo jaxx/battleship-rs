@@ -2,8 +2,7 @@ use std::thread;
 use std::collections::HashMap;
 use std::sync::{Arc, mpsc, Mutex};
 
-use websocket::{Server, WebSocketStream};
-use websocket::sender;
+use websocket::{Message, receiver, sender, Sender, Server, WebSocketStream};
 
 pub fn start() {
     thread::spawn(listen);
@@ -33,8 +32,11 @@ fn listen() {
                 .unwrap();
 
             let ip_string = format!("{}", ip);
+            let (mut ws_sender, ws_receiver) = client.split();
 
-            thread::spawn(move || client_thread(ip_string, sender));
+            ws_sender.send_message(&Message::text(format!("Welcome, {}!", ip_string))).unwrap();
+
+            thread::spawn(move || client_thread(ip_string, sender, ws_receiver));
         });
     }
 }
@@ -47,7 +49,9 @@ fn game_thread(clients: Arc<Mutex<HashMap<String, sender::Sender<WebSocketStream
     }
 }
 
-fn client_thread(ip: String, sender: mpsc::Sender<String>) {
+fn client_thread(ip: String,
+                 sender: mpsc::Sender<String>,
+                 ws_receiver: receiver::Receiver<WebSocketStream>) {
     println!("client_thread - sending info...");
     sender.send(ip).unwrap();
 }
