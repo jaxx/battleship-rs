@@ -9,9 +9,9 @@ pub fn start() {
 }
 
 fn listen() {
-    let server = Server::bind("127.0.0.1:3001").unwrap();
+    let server = Server::bind("localhost:3001").unwrap();
 
-    println!("Server listening at: 127.0.0.1:3001");
+    println!("Server listening at: localhost:3001");
 
     let (sender, receiver) = mpsc::channel();
     let connected_clients = Arc::new(Mutex::new(HashMap::new()));
